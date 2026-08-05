@@ -122,9 +122,11 @@ p {
 
 
 .logo-icon {
-
-  font-size:1.8rem;
-
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
 }
 
 

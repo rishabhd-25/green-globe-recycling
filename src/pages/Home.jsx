@@ -241,7 +241,7 @@ function Home() {
               </strong>
 
               <span>
-                (000) 000-0000
+                +91 9867066766
               </span>
 
             </div>
@@ -255,7 +255,7 @@ function Home() {
               </strong>
 
               <span>
-                info@greengloberecycling.com
+                jatin@greenglobece.com
               </span>
 
             </div>

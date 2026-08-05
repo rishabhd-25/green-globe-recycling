@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import logo from "../assets/green-globe-logo.svg";
 
 function Navbar() {
 
@@ -14,16 +14,18 @@ function Navbar() {
         className="logo"
       >
 
-        <span className="logo-icon">
+        <img
+        src={logo}
+        alt="Green Globe CE & Recycling"
+        className="logo-icon"
+        />
 
-          🌿
-
-        </span>
+        
 
 
         <span>
 
-          Green Globe Recycling
+          Green Globe CE & Recycling
 
         </span>
 

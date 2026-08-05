@@ -41,7 +41,7 @@ const certificates = [
     tab: "Central Pulp & Paper Research Institute",
 
     title:
-      "CPPRI Independent Laboratory Test Report",
+      "CPPRI Independent Laboratory Pulp Test Report",
 
     issuer:
       "Central Pulp & Paper Research Institute (CPPRI), Ministry of Commerce & Industry, Government of India",
