@@ -1,8 +1,79 @@
+import { useState } from "react";
 import Hero from "../components/Hero";
+
+import video1 from "../assets/Video_1.mp4";
+import video2 from "../assets/Video_2.mp4";
+import video3 from "../assets/Video_3.mp4";
 import specimenCertificate from "../assets/Specimen Recycling Certificate.png";
 import CertificateViewer from "../components/CertificateViewer";
 
+const companyVideos = [
+  {
+    src: video1,
+    start: 3,
+    end: 11,
+  },
+  {
+    src: video2,
+    start: 0,
+    end: 8,
+  },
+  {
+    src: video3,
+    start: 12,
+    end: 21,
+  },
+];
+
 function Home() {
+
+  const [activeVideo, setActiveVideo] = useState(0);
+  const [orientation, setOrientation] = useState("landscape");
+
+  const currentVideo = companyVideos[activeVideo];
+
+  const goToPreviousVideo = () => {
+    setActiveVideo((previous) =>
+      (previous - 1 + companyVideos.length) % companyVideos.length
+    );
+  };
+
+  const goToNextVideo = () => {
+    setActiveVideo((previous) =>
+      (previous + 1) % companyVideos.length
+    );
+  };
+
+  const handleMetadata = (event) => {
+    const video = event.currentTarget;
+
+    // Automatically detect vertical vs. horizontal
+    if (video.videoHeight > video.videoWidth) {
+      setOrientation("portrait");
+    } else {
+      setOrientation("landscape");
+    }
+
+    // Start at the time you specified
+    video.currentTime = Math.min(
+      currentVideo.start,
+      Math.max(0, video.duration - 0.1)
+    );
+
+    video.play().catch(() => {});
+  };
+
+  const handleTimeUpdate = (event) => {
+    const video = event.currentTarget;
+
+    if (video.currentTime >= currentVideo.end) {
+      setActiveVideo((previous) =>
+        (previous + 1) % companyVideos.length
+      );
+    }
+  };
+
+
   return (
     <>
       <Hero />
@@ -39,20 +110,34 @@ function Home() {
         </div>
 
 
-        <div className="overview-image">
+        <div className={`overview-image video-container ${orientation}`}>
+          <button
+            className="video-arrow video-arrow-left"
+            onClick={goToPreviousVideo}
+            aria-label="Previous video"
+          >
+            ‹
+          </button>
 
-          <div className="image-placeholder">
+          <video
+            key={currentVideo.src}
+            className="company-video"
+            src={currentVideo.src}
+            muted
+            autoPlay
+            playsInline
+            preload="metadata"
+            onLoadedMetadata={handleMetadata}
+            onTimeUpdate={handleTimeUpdate}
+          />
 
-            <span>
-              🌱
-            </span>
-
-            <p>
-              Company Image
-            </p>
-
-          </div>
-
+          <button
+            className="video-arrow video-arrow-right"
+            onClick={goToNextVideo}
+            aria-label="Next video"
+          >
+            ›
+          </button>
         </div>
 
       </section>
